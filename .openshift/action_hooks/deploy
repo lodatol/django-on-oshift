@@ -1,0 +1,16 @@
+#!/bin/bash
+
+export VIRTUAL_ENV="$OPENSHIFT_HOMEDIR/python/virtenv"
+export PATH="$VIRTUAL_ENV/bin:$PATH"
+unset PYTHON_HOME
+
+mkdir -p "$OPENSHIFT_DATA_DIR"/db
+mkdir -p "$OPENSHIFT_DATA_DIR"/media
+mkdir -p "$OPENSHIFT_DATA_DIR"/static
+
+echo "Django Sync db"
+rm -fr "$OPENSHIFT_DATA_DIR"/static/*
+python "$OPENSHIFT_REPO_DIR"/manage.py syncdb --noinput
+
+echo "Collecting static files"
+python "$OPENSHIFT_REPO_DIR"/manage.py collectstatic --noinput
