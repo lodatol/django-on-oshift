@@ -20,10 +20,6 @@ from twisted.web.server import Site
 
 from django.core.handlers.wsgi import WSGIHandler
 
-from autobahn.wamp import WampServerFactory
-from autobahn.resource import WebSocketResource, \
-    WSGIRootResource, HTTPChannelHixie76Aware
-
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'apps.settings'
 
@@ -34,9 +30,7 @@ def createDjangoEndPoint():
     return WSGIResource(reactor, pool, WSGIHandler())
 
 def run_twisted_server(ip, port):
-    rootResource = WSGIRootResource(createDjangoEndPoint(),{})
-    site = Site(rootResource)
-    site.protocol = HTTPChannelHixie76Aware
+    site = Site(createDjangoEndPoint())
     from twisted.python import log as log_twisted
     log_twisted.startLogging(sys.stdout)
     reactor.listenTCP(port, site, interface=ip)
