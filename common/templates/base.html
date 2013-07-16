@@ -1,0 +1,27 @@
+{% load staticfiles %}{% load i18n %}<!doctype html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="{{request.LANGUAGE_CODE}}"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8" lang="{{request.LANGUAGE_CODE}}"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang="{{request.LANGUAGE_CODE}}"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="{{request.LANGUAGE_CODE}}" xmlns="http://www.w3.org/1999/xhtml" > <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+
+    <title>{% block title %}My site{% endblock %}</title>
+    {% block head %}
+    {% endblock %}
+</head>
+
+<body>
+{% block content %}
+{% endblock %}
+</body>
+
+{% block bottom%}
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js" data-dojo-config="async: true" type="text/javascript" ></script>
+{% endblock %}
+</html>
+
